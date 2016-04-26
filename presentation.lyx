@@ -1,0 +1,605 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+%\usetheme{Warsaw}
+\usetheme{Boadilla}
+% or ...
+
+\usecolortheme{orchid}
+\setbeamertemplate{footline}[text line]{} % makes the footer EMPTY
+
+\setbeamercovered{transparent}
+% or whatever (possibly just delete it)
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman times
+\font_sans lmss
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+The Hypothesis Testing Library for Python
+\end_layout
+
+\begin_layout Subtitle
+An Introduction
+\end_layout
+
+\begin_layout Author
+Anne Mulhern
+\end_layout
+
+\begin_layout Institute
+Red Hat, Inc.
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Audience
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Pessimistic Python Programmers who are mostly unfamiliar with Property-Based
+ Testing.
+\end_layout
+
+\begin_layout Itemize
+If you aren't pessimistic enough...
+\end_layout
+
+\begin_layout Itemize
+If you are unfamiliar with Python...
+\end_layout
+
+\begin_layout Itemize
+If you already know about QuickCheck and have been using something like
+ it for years...
+\end_layout
+
+\begin_layout Standard
+then this talk is probably not for you.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Expectations
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+What this talk will include.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Extremely
+\emph default
+ simple code examples.
+\end_layout
+
+\begin_layout Itemize
+A little bit of personal experience.
+\end_layout
+
+\begin_layout Itemize
+Pointers to other sources.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example: Unit Testing
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Unit testing a simple 
+\family typewriter
+convert_from_nat()
+\family default
+ function.
+\end_layout
+
+\begin_layout Itemize
+Check that it works on 0.
+\end_layout
+
+\begin_layout Itemize
+Check multiple bases.
+\end_layout
+
+\begin_layout Itemize
+Check converting large values to small bases and vice-versa.
+\end_layout
+
+\begin_layout Itemize
+Check exceptions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def test():
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert convert_from_nat(0, 2) == []
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert convert_from_nat(0, 1024) == []
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert convert_from_nat(3, 2) == [1, 1]
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert convert_from_nat(2, 3) == [2]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Make Titles Informative.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Block
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+1-
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 2
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Untitled block.
+\end_layout
+
+\begin_layout Itemize
+Shown on all slides.
+\end_layout
+
+\end_deeper
+\begin_layout ExampleBlock
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 2
+status collapsed
+
+\begin_layout Plain Layout
+Some Example Block Title
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $e^{i\pi}=-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $e^{i\pi/2}=i$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Make Titles Informative.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Example
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+1-
+\end_layout
+
+\end_inset
+
+On first slide.
+ 
+\end_layout
+
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+2-
+\end_layout
+
+\end_inset
+
+On second slide.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Make Titles Informative.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Theorem
+On first slide.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Corollary
+On second slide.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Make Titles Informative.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout ColumnsTopAligned
+
+\end_layout
+
+\begin_deeper
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+1-
+\end_layout
+
+\end_inset
+
+In left column.
+\end_layout
+
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout Corollary
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+2-
+\end_layout
+
+\end_inset
+
+In right column.
+\begin_inset Newline newline
+\end_inset
+
+New line
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Summary
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The
+\color none
+ 
+\color red
+first main message
+\color none
+ of your talk in one or two lines.
+\end_layout
+
+\begin_layout Itemize
+The
+\color none
+ 
+\color red
+second main message
+\color none
+ of your talk in one or two lines.
+\end_layout
+
+\begin_layout Itemize
+Perhaps a
+\color none
+ 
+\color red
+third message
+\color none
+, but not more than that.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+An outlook is always optional.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+vskip0pt plus.5fill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Outlook
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+What we have not done yet.
+\end_layout
+
+\begin_layout Itemize
+Even more stuff.
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_body
+\end_document
