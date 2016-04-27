@@ -81,7 +81,27 @@
 \begin_body
 
 \begin_layout Title
-The Hypothesis Testing Library for Python
+The Hypothesis
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hypothesis.works/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Testing Library for Python
 \end_layout
 
 \begin_layout Subtitle
@@ -207,14 +227,28 @@ Check multiple bases.
 \end_layout
 
 \begin_layout Itemize
-Check converting large values to small bases and vice-versa.
+Check converting large values to small bases and small values to large bases.
 \end_layout
 
 \begin_layout Itemize
 Check exceptions.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
+etc.
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Few Simple Unit Tests in Pytest Style
+\end_layout
+
+\end_inset
+
+
 \begin_inset listings
 lstparams "language=Python,showstringspaces=false"
 inline false
@@ -260,7 +294,382 @@ def test():
 status open
 
 \begin_layout Plain Layout
-Make Titles Informative.
+Unit Tests are a Good Idea
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+They are 
+\emph on
+much
+\emph default
+ better than nothing and there is good library support in Python
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Pytest: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://pytest.org/latest/
+\end_layout
+
+\end_inset
+
+ or the Python unittest package
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+They are an 
+\emph on
+implicit
+\emph default
+ and 
+\emph on
+partial
+\emph default
+ specification of the code they test.
+\end_layout
+
+\begin_layout Itemize
+They catch a surprising number of bugs in the code they test.
+\end_layout
+
+\begin_layout Itemize
+They catch regressions in new versions.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example: Hypothesis Testing
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Using Hypothesis to test a simple 
+\family typewriter
+convert_from_nat()
+\family default
+ function.
+\end_layout
+
+\begin_layout Enumerate
+Come up with a specification.
+\end_layout
+
+\begin_layout Enumerate
+Express the specification in Python.
+\end_layout
+
+\begin_layout Enumerate
+Use Hypothesis to test that the specification holds.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula $\forall v,\forall b,\mathtt{convert\_to\_nat}(\mathtt{convert\_from\_nat}(v,b),b)=v)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Simple Test Using Hypothesis
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "language=Python,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@given(
+\end_layout
+
+\begin_layout Plain Layout
+
+   value=strategies.integers(min_value=0),
+\end_layout
+
+\begin_layout Plain Layout
+
+   base=strategies.integers(min_value=2)
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+def test(value, base):
+\end_layout
+
+\begin_layout Plain Layout
+
+    result = convert_from_nat(value, base)
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert convert_to_nat(result, base) == value
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Property-Based Testing is a 
+\emph on
+Great
+\emph default
+ Idea
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Especially with Hypothesis.
+\end_layout
+
+\begin_layout Standard
+Hypothesis tests:
+\end_layout
+
+\begin_layout Itemize
+are an 
+\emph on
+explicit
+\emph default
+ and 
+\emph on
+partial
+\emph default
+ specification of the code they test.
+\end_layout
+
+\begin_layout Itemize
+catch more bugs than unit tests with less test code
+\end_layout
+
+\begin_layout Itemize
+employ code reuse in the choice of examples
+\end_layout
+
+\begin_layout Itemize
+favor examples that previously failed, enabling a simple-minded approach
+ to debugging
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Does not work with CI, but nice when debugging on a personal machine.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+are highly configurable
+\end_layout
+
+\begin_layout Itemize
+and so much more
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Property-Based Testing is not Easy
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Even with Hypothesis, the upfront costs are higher than with unit testing.
+\end_layout
+
+\begin_layout Standard
+A partial list of difficulties:
+\end_layout
+
+\begin_layout Itemize
+It may be difficult to come up with a useful specification
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+You can always cheat with unit tests.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+It may be difficult to express that specification in Python.
+\end_layout
+
+\begin_layout Itemize
+It may be hard to test that specification in a reasonable amount of time.
+\end_layout
+
+\begin_layout Itemize
+It may be that Hypothesis does not have a strategy for generating the values
+ needed as arguments to the specification
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Hypothesis has some strategies for composing other strategies; I have yet
+ to require a custom strategy.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+I Was Wrong...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+I used to believe that property-based testing was only good for purely functiona
+l libraries, i.e., Haskell stuff.
+\end_layout
+
+\begin_layout Standard
+A partial list of difficulties:
+\end_layout
+
+\begin_layout Itemize
+It may be difficult to come up with a useful specification
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+You can always cheat with unit tests.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+It may be difficult to express that specification in Python.
+\end_layout
+
+\begin_layout Itemize
+It may be hard to test that specification in a reasonable amount of time.
+\end_layout
+
+\begin_layout Itemize
+It may be that Hypothesis does not have a strategy for generating the values
+ needed as arguments to the specification
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Hypothesis has some strategies for composing other strategies; I have yet
+ to require a custom strategy.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Unit Tests are a Good Idea
 \end_layout
 
 \end_inset
