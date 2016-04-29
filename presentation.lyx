@@ -362,7 +362,7 @@ They catch regressions in new versions.
 status open
 
 \begin_layout Plain Layout
-Example: Hypothesis Testing
+Example: Hypothesis Testing (1)
 \end_layout
 
 \end_inset
@@ -452,6 +452,147 @@ def test(value, base):
 \end_inset
 
 
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example: Hypothesis Testing (2)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Using Hypothesis to test a simple 
+\family typewriter
+convert_from_nat()
+\family default
+ function.
+\end_layout
+
+\begin_layout Theorem
+No leading zeros in result of 
+\family typewriter
+convert_from_nat()
+\family default
+ function.
+ This is a generalization of 
+\begin_inset Formula $\forall b,\mathtt{convert\_from\_nat}(0,b)=\mathtt{[]}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Simple Test Using Hypothesis
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "language=Python,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@given(
+\end_layout
+
+\begin_layout Plain Layout
+
+   value=strategies.integers(min_value=0),
+\end_layout
+
+\begin_layout Plain Layout
+
+   base=strategies.integers(min_value=2)
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+def test(value, base):
+\end_layout
+
+\begin_layout Plain Layout
+
+    result = convert_from_nat(value, base)
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert result == [] or result[0] != 0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+What Hypothesis Does with This Test Code
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Hypothesis generates, runs, and remembers tests to check the specified propertie
+s.
+\end_layout
+
+\begin_layout Enumerate
+It makes arguments for your test functions using the strategies specified.
+\end_layout
+
+\begin_layout Enumerate
+It runs tests for these arguments.
+\end_layout
+
+\begin_layout Enumerate
+It reports the results, stopping on the first failure, if any.
+\end_layout
+
+\begin_layout Enumerate
+It stores the tests in a database, remembering the result.
+\end_layout
+
+\begin_layout Standard
+This is not a description of the implementation, just a simplified description
+ of what the user experiences.
 \end_layout
 
 \end_deeper
@@ -593,6 +734,10 @@ Hypothesis has some strategies for composing other strategies; I have yet
 .
 \end_layout
 
+\begin_layout Standard
+But the gains are, typically, very great.
+\end_layout
+
 \end_deeper
 \begin_layout Separator
 
@@ -614,20 +759,20 @@ I Was Wrong...
 \begin_deeper
 \begin_layout FrameSubtitle
 I used to believe that property-based testing was only good for purely functiona
-l libraries, i.e., Haskell stuff.
+l applications.
 \end_layout
 
 \begin_layout Standard
-A partial list of difficulties:
+Reasons:
 \end_layout
 
 \begin_layout Itemize
-It may be difficult to come up with a useful specification
+I was first introduced to property-based testing in Haskell
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-You can always cheat with unit tests.
+Haskell's QuickCheck is the original implementation of this idea.
 \end_layout
 
 \end_inset
@@ -636,27 +781,7 @@ You can always cheat with unit tests.
 \end_layout
 
 \begin_layout Itemize
-It may be difficult to express that specification in Python.
-\end_layout
-
-\begin_layout Itemize
-It may be hard to test that specification in a reasonable amount of time.
-\end_layout
-
-\begin_layout Itemize
-It may be that Hypothesis does not have a strategy for generating the values
- needed as arguments to the specification
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Hypothesis has some strategies for composing other strategies; I have yet
- to require a custom strategy.
-\end_layout
-
-\end_inset
-
-.
+Examples are typically in mathematics or Haskelly sorts of applications.
 \end_layout
 
 \end_deeper
@@ -669,7 +794,7 @@ Hypothesis has some strategies for composing other strategies; I have yet
 status open
 
 \begin_layout Plain Layout
-Unit Tests are a Good Idea
+...but Now I Know Better
 \end_layout
 
 \end_inset
@@ -678,75 +803,180 @@ Unit Tests are a Good Idea
 \end_layout
 
 \begin_deeper
-\begin_layout Block
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-1-
+\begin_layout FrameSubtitle
+I have used Hypothesis successfully with pyudev, a library that wraps libudev.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+When I took over this library from the previous implementer, I found that
+ he had been using property-based testing all along! All I needed to do
+ was Hypothesize it.
 \end_layout
 
-\end_inset
-
-
-\begin_inset Argument 2
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Untitled block.
+\begin_layout Standard
+Basic principles of property-based testing on libudev:
 \end_layout
 
 \begin_layout Itemize
-Shown on all slides.
+Run on a real system, using output of 
+\family typewriter
+udevadm info
+\family default
+ as oracle.
+\end_layout
+
+\begin_layout Itemize
+Mock what needs to be mocked.
+\end_layout
+
+\begin_layout Itemize
+Check pyudev functions against themselves.
+\end_layout
+
+\begin_layout Itemize
+etc.
 \end_layout
 
 \end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example: Pyudev Hypothesis Testing
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Testing pyudev against itself 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+More examples at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/pyudev/pyudev
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout ExampleBlock
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset Argument 2
-status collapsed
+status open
 
 \begin_layout Plain Layout
-Some Example Block Title
+A Simple Test Using Hypothesis
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "language=Python,basicstyle={\footnotesize},showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@given(
+\end_layout
+
+\begin_layout Plain Layout
+
+   _CONTEXT_STRATEGY,
+\end_layout
+
+\begin_layout Plain Layout
+
+   strategies.sampled_from(_DEVICES)
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+@settings(max_examples=5)
+\end_layout
+
+\begin_layout Plain Layout
+
+def test_from_name(self, a_context, a_device):       
+\end_layout
+
+\begin_layout Plain Layout
+
+   new_device = Devices.from_name(
+\end_layout
+
+\begin_layout Plain Layout
+
+      a_context,
+\end_layout
+
+\begin_layout Plain Layout
+
+      a_device.subsystem,
+\end_layout
+
+\begin_layout Plain Layout
+
+      a_device.sys_name
+\end_layout
+
+\begin_layout Plain Layout
+
+   )
+\end_layout
+
+\begin_layout Plain Layout
+
+   assert new_device == a_device
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Benefits of Hypothesizing the Tests
 \end_layout
 
 \end_inset
@@ -755,168 +985,33 @@ Some Example Block Title
 \end_layout
 
 \begin_deeper
+\begin_layout FrameSubtitle
+What was gained by using Hypothesis.
+\end_layout
+
 \begin_layout Itemize
-\begin_inset Formula $e^{i\pi}=-1$
-\end_inset
-
-.
+If the test couldn't be run, usually because no device with the correct
+ properties was available, get 1 skip message, not 100.
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $e^{i\pi/2}=i$
-\end_inset
-
-.
+Test code is clearer.
 \end_layout
 
-\end_deeper
-\end_deeper
-\begin_layout Separator
-
+\begin_layout Itemize
+Debugging is faster.
 \end_layout
 
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Make Titles Informative.
- 
+\begin_layout Itemize
+etc.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+Found a few signficant bugs in pyudev, a few significant problems in libudev,
+ and a significant problem with udev DEVLINKS property in the presence of
+ multipath.
 \end_layout
 
-\begin_deeper
-\begin_layout Example
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-1-
-\end_layout
-
-\end_inset
-
-On first slide.
- 
-\end_layout
-
-\begin_layout Separator
-
-\end_layout
-
-\begin_layout Example
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-2-
-\end_layout
-
-\end_inset
-
-On second slide.
-\end_layout
-
-\end_deeper
-\begin_layout Separator
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Make Titles Informative.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Theorem
-On first slide.
-\end_layout
-
-\begin_layout Pause
-
-\end_layout
-
-\begin_layout Corollary
-On second slide.
-\end_layout
-
-\end_deeper
-\begin_layout Separator
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Make Titles Informative.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout ColumnsTopAligned
-
-\end_layout
-
-\begin_deeper
-\begin_layout Column
-5cm
-\end_layout
-
-\begin_layout Theorem
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-1-
-\end_layout
-
-\end_inset
-
-In left column.
-\end_layout
-
-\begin_layout Column
-5cm
-\end_layout
-
-\begin_layout Corollary
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-2-
-\end_layout
-
-\end_inset
-
-In right column.
-\begin_inset Newline newline
-\end_inset
-
-New line
-\end_layout
-
-\end_deeper
 \end_deeper
 \begin_layout Separator
 
@@ -936,79 +1031,152 @@ Summary
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-The
-\color none
- 
-\color red
-first main message
-\color none
- of your talk in one or two lines.
-\end_layout
-
-\begin_layout Itemize
-The
-\color none
- 
-\color red
-second main message
-\color none
- of your talk in one or two lines.
-\end_layout
-
-\begin_layout Itemize
-Perhaps a
-\color none
- 
-\color red
-third message
-\color none
-, but not more than that.
+\begin_layout FrameSubtitle
+Property-based testing is great and so is Hypothesis.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
+For all the reasons mentioned above:
+\end_layout
+
+\begin_layout Itemize
+memoization of examples that refute the specification
+\end_layout
+
+\begin_layout Itemize
+an explicit specification
+\end_layout
+
+\begin_layout Itemize
+etc.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
 status open
 
 \begin_layout Plain Layout
-An outlook is always optional.
+Not Discussed
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-vskip0pt plus.5fill
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Outlook
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-What we have not done yet.
+\begin_layout FrameSubtitle
+Things I didn't talk about.
 \end_layout
 
 \begin_layout Itemize
-Even more stuff.
+Proof of concept of Hypothesis in Java
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I haven't tried it.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Hypothesis's example minimization
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I think my examples tend to be minimized already, although I'm not sure.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Property-based testing in other languages
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It's been tried and there is a list with estimates of quality at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+hypothesis.works
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Other strengths of Hypothesis
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Hypothesis goes beyond unit testing in some interesting ways.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Hypothesis' higher-order strategies
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+sampled_from()
+\family default
+ is an example, but there are more interesting ones.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+How to write your own strategy
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I haven't had a reason to yet, the higher-order strategies have been enough.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
-\end_deeper
+\begin_layout Separator
+
+\end_layout
+
 \end_body
 \end_document
