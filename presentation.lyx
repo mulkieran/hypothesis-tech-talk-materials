@@ -9,7 +9,7 @@
 % or ...
 
 \usecolortheme{orchid}
-\setbeamertemplate{footline}[text line]{} % makes the footer EMPTY
+\setbeamertemplate{footline}[frame number]{} % makes the footer EMPTY
 
 \setbeamercovered{transparent}
 % or whatever (possibly just delete it)
@@ -392,7 +392,7 @@ Use Hypothesis to test that the specification holds.
 \end_layout
 
 \begin_layout Theorem
-\begin_inset Formula $\forall v,\forall b,\mathtt{convert\_to\_nat}(\mathtt{convert\_from\_nat}(v,b),b)=v)$
+\begin_inset Formula $\forall v\geq0,\forall b\geq2,\mathtt{convert\_to\_nat}(\mathtt{convert\_from\_nat}(v,b),b)=v)$
 \end_inset
 
 
@@ -482,13 +482,7 @@ convert_from_nat()
 \end_layout
 
 \begin_layout Theorem
-No leading zeros in result of 
-\family typewriter
-convert_from_nat()
-\family default
- function.
- This is a generalization of 
-\begin_inset Formula $\forall b,\mathtt{convert\_from\_nat}(0,b)=\mathtt{[]}.$
+\begin_inset Formula $\forall v\geq0,\forall b\geq2,\mathtt{convert\_from\_nat}(v,b)\;does\;not\;have\;leading\;zeros.$
 \end_inset
 
 
@@ -542,7 +536,7 @@ def test(value, base):
 
 \begin_layout Plain Layout
 
-    assert result == [] or result[0] != 0
+    assert result[:1] != [0]
 \end_layout
 
 \end_inset
@@ -583,7 +577,17 @@ It runs tests for these arguments.
 \end_layout
 
 \begin_layout Enumerate
-It reports the results, stopping on the first failure, if any.
+It reports the results, stopping on the first failure, if any
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Hypothesis is satisfied with just one example that refutes the hypothesis.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -639,7 +643,7 @@ partial
 \end_layout
 
 \begin_layout Itemize
-catch more bugs than unit tests with less test code
+more tests with less test code
 \end_layout
 
 \begin_layout Itemize
@@ -808,7 +812,7 @@ I have used Hypothesis successfully with pyudev, a library that wraps libudev.
 \end_layout
 
 \begin_layout Standard
-When I took over this library from the previous implementer, I found that
+When I took over this library from the original developer, I found that
  he had been using property-based testing all along! All I needed to do
  was Hypothesize it.
 \end_layout
@@ -820,7 +824,7 @@ Basic principles of property-based testing on libudev:
 \begin_layout Itemize
 Run on a real system, using output of 
 \family typewriter
-udevadm info
+udevadm
 \family default
  as oracle.
 \end_layout
@@ -1045,6 +1049,10 @@ memoization of examples that refute the specification
 
 \begin_layout Itemize
 an explicit specification
+\end_layout
+
+\begin_layout Itemize
+code reuse
 \end_layout
 
 \begin_layout Itemize
