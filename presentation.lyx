@@ -1069,6 +1069,251 @@ etc.
 status open
 
 \begin_layout Plain Layout
+The Problem with Environment Dependent Tests
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Hypothesis can only communicate failure or success to the testing framework.
+\end_layout
+
+\begin_layout Standard
+It communicates:
+\end_layout
+
+\begin_layout Itemize
+success - if it tried all examples and could not refute the hypothesis
+\end_layout
+
+\begin_layout Itemize
+failure - if it found a counter-example or could not find 
+\emph on
+any
+\emph default
+ examples to try
+\end_layout
+
+\begin_layout Standard
+I would rather it communicated:
+\end_layout
+
+\begin_layout Itemize
+success - if it tried all examples and could not refute the hypothesis
+\end_layout
+
+\begin_layout Itemize
+failure - if it found a counter-example
+\end_layout
+
+\begin_layout Itemize
+skipped - if it could not find the required minimum number of examples
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+The Problem with Environment Dependent Tests
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Example
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Simple Test Using Hypothesis
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "language=Python,basicstyle={\footnotesize},showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+_devices = [d for d in _DEVICES if d.find_parent(d.subsystem)]
+\end_layout
+
+\begin_layout Plain Layout
+
+@pytest.mark.skipif(
+\end_layout
+
+\begin_layout Plain Layout
+
+   len(_devices) == 0,
+\end_layout
+
+\begin_layout Plain Layout
+
+   reason='no device with a parent in the same subsystem'
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+@given(strategies.sampled_from(_devices))
+\end_layout
+
+\begin_layout Plain Layout
+
+def test_child_of_parent(self, a_device):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """ The first parent in the same subsystem is always among
+\end_layout
+
+\begin_layout Plain Layout
+
+    a device's ancestors.
+ """
+\end_layout
+
+\begin_layout Plain Layout
+
+    parent = a_device.find_parent(a_device.subsystem)
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert parent in a_device.ancestors
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+The Problem with Environment Dependent Tests
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Preference
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Simple Test Using Hypothesis
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "language=Python,basicstyle={\footnotesize},showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@given(strategies.sampled_from(_DEVICES).filter(
+\end_layout
+
+\begin_layout Plain Layout
+
+   lambda d: d.find_parent(d.subsystem)
+\end_layout
+
+\begin_layout Plain Layout
+
+))
+\end_layout
+
+\begin_layout Plain Layout
+
+def test_child_of_parent(self, a_device):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """ The first parent in the same subsystem is always among
+\end_layout
+
+\begin_layout Plain Layout
+
+    a device's ancestors.
+ """
+\end_layout
+
+\begin_layout Plain Layout
+
+    parent = a_device.find_parent(a_device.subsystem)
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert parent in a_device.ancestors
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In a device-poor environment this test would be marked as skipped, in a
+ device-rich environment it would be marked as failing or succeeding.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
 Not Discussed (1)
 \end_layout
 
@@ -1173,8 +1418,7 @@ note()
 status open
 
 \begin_layout Plain Layout
-I don't use this often, because the way Hypothesis identifies counter-examples
- is usually enough.
+This is most useful in CI, where you can't interact with the tests directly.
 \end_layout
 
 \end_inset
@@ -1202,7 +1446,7 @@ For example, builds()
 \end_layout
 
 \begin_layout Itemize
-How to write your own strategy
+How to write your own strategy from scratch
 \begin_inset Foot
 status open
 
