@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass beamer
 \begin_preamble
 %\usetheme{Warsaw}
@@ -20,16 +22,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman times
-\font_sans lmss
-\font_typewriter default
-\font_math auto
+\font_roman "times" "default"
+\font_sans "lmss" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -109,7 +111,7 @@ An Introduction
 \end_layout
 
 \begin_layout Author
-Anne Mulhern
+Mulhern
 \end_layout
 
 \begin_layout Institute
@@ -121,9 +123,13 @@ Red Hat, Inc.
 status open
 
 \begin_layout Plain Layout
-Audience
+Introduction
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -131,29 +137,200 @@ Audience
 
 \begin_deeper
 \begin_layout FrameSubtitle
-Pessimistic Python Programmers who are mostly unfamiliar with Property-Based
- Testing.
-\end_layout
-
-\begin_layout Itemize
-If you aren't pessimistic enough...
-\end_layout
-
-\begin_layout Itemize
-If you are unfamiliar with Python...
-\end_layout
-
-\begin_layout Itemize
-If you already know about QuickCheck and have been using something like
- it for years...
+Who am I?
 \end_layout
 
 \begin_layout Standard
-then this talk is probably not for you.
+A software engineer who is deeply pessimistic.
+ Consequently I am fanatical about...
+\end_layout
+
+\begin_layout Itemize
+Testing
+\end_layout
+
+\begin_layout Itemize
+CI
+\end_layout
+
+\begin_layout Itemize
+Code Quality Tools
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Why am I talking about Hypothesis?
+\end_layout
+
+\begin_layout Itemize
+Discovered Hypothesis in Aug 2015
+\end_layout
+
+\begin_layout Itemize
+Merged first Hypothesis PR in March 2016
+\end_layout
+
+\begin_layout Itemize
+Gave a tech talk at Red Hat about Hypothesis in May 2016
+\end_layout
+
+\begin_layout Itemize
+Merged a substantive PR into Hypothesis repo in June 2016
+\end_layout
+
+\begin_layout Itemize
+Developed a Hypothesis strategy of my own in Jan 2017
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/stratis-storage/hs-dbus-signature
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Became a Hypothesis co-maintainer in 2017
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+What is the position of Hypothesis at Red Hat and elsewhere?
+\end_layout
+
+\begin_layout Itemize
+I believe that Hypothesis is used at Red Hat but I don't personally know
+ anybody else who uses it here.
+\end_layout
+
+\begin_layout Itemize
+It is well liked in the world.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Over two thousand stars on GitHub
+\end_layout
+
+\begin_layout Itemize
+More than ten entities have endorsed Hypothesis by submitting a PR to the
+ Hypothesis repo
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hypothesis.readthedocs.io/en/latest/endorsements.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+More than thirty different dependent packages have been registered by submitting
+ a PR to the Hypothesis repo
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hypothesis.readthedocs.io/en/latest/usage.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -165,6 +342,10 @@ status open
 Expectations
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -192,7 +373,10 @@ Pointers to other sources.
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -201,9 +385,13 @@ Pointers to other sources.
 status open
 
 \begin_layout Plain Layout
-Example: Unit Testing
+Example: Example-Based Testing
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -211,7 +399,7 @@ Example: Unit Testing
 
 \begin_deeper
 \begin_layout FrameSubtitle
-Unit testing a simple 
+Testing a simple 
 \family typewriter
 convert_from_nat()
 \family default
@@ -243,7 +431,7 @@ etc.
 status open
 
 \begin_layout Plain Layout
-A Few Simple Unit Tests in Pytest Style
+A Few Simple Example-Based Tests using Pytest
 \end_layout
 
 \end_inset
@@ -285,7 +473,10 @@ def test():
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -294,9 +485,13 @@ def test():
 status open
 
 \begin_layout Plain Layout
-Unit Tests are a Good Idea
+Example-Based Tests are a Good Idea
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -353,7 +548,10 @@ They catch regressions in new versions.
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -362,9 +560,13 @@ They catch regressions in new versions.
 status open
 
 \begin_layout Plain Layout
-Example: Hypothesis Testing (1)
+Example: Property-Based Testing (1)
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -455,7 +657,10 @@ def test(value, base):
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -464,9 +669,13 @@ def test(value, base):
 status open
 
 \begin_layout Plain Layout
-Example: Hypothesis Testing (2)
+Example: Property-Based Testing (2)
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -545,7 +754,10 @@ def test(value, base):
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -557,6 +769,10 @@ status open
 What Hypothesis Does with This Test Code
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -582,7 +798,7 @@ It reports the results, stopping on the first failure, if any
 status open
 
 \begin_layout Plain Layout
-Hypothesis is satisfied with just one example that refutes the hypothesis.
+This will be changing soon to include multi-bug reporting for a single test
 \end_layout
 
 \end_inset
@@ -600,7 +816,10 @@ This is not a description of the implementation, just a simplified description
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -616,6 +835,10 @@ Great
  Idea
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -674,7 +897,10 @@ and so much more
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -686,6 +912,10 @@ status open
 Property-Based Testing is not Easy
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -706,7 +936,7 @@ It may be difficult to come up with a useful specification
 status open
 
 \begin_layout Plain Layout
-You can always cheat with unit tests.
+You can always cheat with example-based tests.
 \end_layout
 
 \end_inset
@@ -729,8 +959,9 @@ It may be that Hypothesis does not have a strategy for generating the values
 status open
 
 \begin_layout Plain Layout
-Hypothesis has some strategies for composing other strategies; I have yet
- to require a custom strategy.
+Hypothesis has some strategies for composing other strategies; I had used
+ Hypothesis for about 18 months before I felt the need to develop a purpose-buil
+t strategy.
 \end_layout
 
 \end_inset
@@ -743,7 +974,10 @@ But the gains are, typically, very great.
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -755,6 +989,10 @@ status open
 I Was Wrong...
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -789,7 +1027,10 @@ Examples are typically in mathematics or Haskelly sorts of applications.
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -801,6 +1042,10 @@ status open
 ...but Now I Know Better
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -842,7 +1087,10 @@ etc.
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -854,6 +1102,10 @@ status open
 Example: Pyudev Hypothesis Testing
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -971,7 +1223,10 @@ def test_from_name(self, a_context, a_device):
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -983,6 +1238,10 @@ status open
 Benefits of Hypothesizing the Tests
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -1017,7 +1276,10 @@ Found a few signficant bugs in pyudev, a few significant problems in libudev,
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -1029,6 +1291,10 @@ status open
 Summary
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -1060,252 +1326,10 @@ etc.
 \end_layout
 
 \end_deeper
-\begin_layout Separator
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-The Problem with Environment Dependent Tests
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-Hypothesis can only communicate failure or success to the testing framework.
-\end_layout
-
 \begin_layout Standard
-It communicates:
-\end_layout
-
-\begin_layout Itemize
-success - if it tried all examples and could not refute the hypothesis
-\end_layout
-
-\begin_layout Itemize
-failure - if it found a counter-example or could not find 
-\emph on
-any
-\emph default
- examples to try
-\end_layout
-
-\begin_layout Standard
-I would rather it communicated:
-\end_layout
-
-\begin_layout Itemize
-success - if it tried all examples and could not refute the hypothesis
-\end_layout
-
-\begin_layout Itemize
-failure - if it found a counter-example
-\end_layout
-
-\begin_layout Itemize
-skipped - if it could not find the required minimum number of examples
-\end_layout
-
-\end_deeper
-\begin_layout Separator
-
-\end_layout
-
-\begin_layout FragileFrame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-The Problem with Environment Dependent Tests
-\end_layout
-
+\begin_inset Separator parbreak
 \end_inset
 
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-Example
-\end_layout
-
-\begin_layout ExampleBlock
-\begin_inset Argument 2
-status open
-
-\begin_layout Plain Layout
-A Simple Test Using Hypothesis
-\end_layout
-
-\end_inset
-
-
-\begin_inset listings
-lstparams "language=Python,basicstyle={\footnotesize},showstringspaces=false"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-_devices = [d for d in _DEVICES if d.find_parent(d.subsystem)]
-\end_layout
-
-\begin_layout Plain Layout
-
-@pytest.mark.skipif(
-\end_layout
-
-\begin_layout Plain Layout
-
-   len(_devices) == 0,
-\end_layout
-
-\begin_layout Plain Layout
-
-   reason='no device with a parent in the same subsystem'
-\end_layout
-
-\begin_layout Plain Layout
-
-)
-\end_layout
-
-\begin_layout Plain Layout
-
-@given(strategies.sampled_from(_devices))
-\end_layout
-
-\begin_layout Plain Layout
-
-def test_child_of_parent(self, a_device):
-\end_layout
-
-\begin_layout Plain Layout
-
-    """ The first parent in the same subsystem is always among
-\end_layout
-
-\begin_layout Plain Layout
-
-    a device's ancestors.
- """
-\end_layout
-
-\begin_layout Plain Layout
-
-    parent = a_device.find_parent(a_device.subsystem)
-\end_layout
-
-\begin_layout Plain Layout
-
-    assert parent in a_device.ancestors
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Separator
-
-\end_layout
-
-\begin_layout FragileFrame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-The Problem with Environment Dependent Tests
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-Preference
-\end_layout
-
-\begin_layout ExampleBlock
-\begin_inset Argument 2
-status open
-
-\begin_layout Plain Layout
-A Simple Test Using Hypothesis
-\end_layout
-
-\end_inset
-
-
-\begin_inset listings
-lstparams "language=Python,basicstyle={\footnotesize},showstringspaces=false"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-@given(strategies.sampled_from(_DEVICES).filter(
-\end_layout
-
-\begin_layout Plain Layout
-
-   lambda d: d.find_parent(d.subsystem)
-\end_layout
-
-\begin_layout Plain Layout
-
-))
-\end_layout
-
-\begin_layout Plain Layout
-
-def test_child_of_parent(self, a_device):
-\end_layout
-
-\begin_layout Plain Layout
-
-    """ The first parent in the same subsystem is always among
-\end_layout
-
-\begin_layout Plain Layout
-
-    a device's ancestors.
- """
-\end_layout
-
-\begin_layout Plain Layout
-
-    parent = a_device.find_parent(a_device.subsystem)
-\end_layout
-
-\begin_layout Plain Layout
-
-    assert parent in a_device.ancestors
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In a device-poor environment this test would be marked as skipped, in a
- device-rich environment it would be marked as failing or succeeding.
-\end_layout
-
-\end_deeper
-\begin_layout Separator
 
 \end_layout
 
@@ -1317,6 +1341,10 @@ status open
 Not Discussed (1)
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -1371,7 +1399,10 @@ hypothesis.works
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -1383,6 +1414,10 @@ status open
 Not Discussed (2)
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -1446,17 +1481,7 @@ For example, builds()
 \end_layout
 
 \begin_layout Itemize
-How to write your own strategy from scratch
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-I haven't had a reason to yet, the higher-order strategies have been enough.
-\end_layout
-
-\end_inset
-
-.
+How to write your own strategy from scratch.
 \end_layout
 
 \begin_layout Itemize
@@ -1493,7 +1518,10 @@ If you just want to interact with objects generated by a strategy within
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -1505,6 +1533,10 @@ status open
 Not Discussed (3)
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -1573,7 +1605,10 @@ Hypothesis has a way of, essentially, dynamically checking class invariants.
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
@@ -1585,6 +1620,10 @@ status open
 Not Discussed (4)
 \end_layout
 
+\end_inset
+
+
+\begin_inset Separator latexpar
 \end_inset
 
 
@@ -1600,7 +1639,7 @@ Hypothesis works with pytest and with unittest.
 \end_layout
 
 \begin_layout Itemize
-Hypothesis Python version support: 2.7, 3.4 and 3.5, Legacy 2.6
+Hypothesis Python version support: 2.7, 3.3, 3.4, 3.5, 3.6 and Legacy 2.6
 \end_layout
 
 \begin_layout Itemize
@@ -1612,85 +1651,10 @@ Hypothesis is used to test itself.
 \end_layout
 
 \end_deeper
-\begin_layout Separator
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Future
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-The gravy train won't keep going forever.
-\end_layout
-
-\begin_layout Itemize
-Developing Hypothesis is a full-time job for David MacIver, but nobody's
- paying for it.
-\end_layout
-
-\begin_layout Itemize
-Teaching Hypothesis is a well, but irregularly paying gig.
-\end_layout
-
 \begin_layout Standard
-Come August, Hypothesis will turn from a job into a hobby for David MacIver
- unless Hypothesis related cash-flow improves.
- Is there anything that users can do about that
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://www.drmaciver.com/2016/04/brand-split
-\end_layout
-
+\begin_inset Separator parbreak
 \end_inset
 
-/
-\end_layout
-
-\end_inset
-
-? Is open-source not really working very well if nothing can be done
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://www.drmaciver.com/2016/04/writing-libraries-is-terrible/
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-?
-\end_layout
-
-\end_deeper
-\begin_layout Separator
 
 \end_layout
 
@@ -1705,15 +1669,22 @@ Thanks
 \end_inset
 
 
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
 \begin_layout FrameSubtitle
-Any questions?
+Any questions or suggestions?
 \end_layout
 
 \end_deeper
-\begin_layout Separator
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
 
 \end_layout
 
