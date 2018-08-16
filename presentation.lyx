@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -32,6 +32,8 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -61,6 +63,7 @@
 \suppress_date false
 \justification true
 \use_refstyle 0
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -69,7 +72,10 @@
 \tocdepth 2
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -83,31 +89,7 @@
 \begin_body
 
 \begin_layout Title
-The Hypothesis
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://hypothesis.works/
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- Testing Library for Python
-\end_layout
-
-\begin_layout Subtitle
-An Introduction
+Property-based Testing in Python and Rust
 \end_layout
 
 \begin_layout Author
@@ -116,6 +98,7 @@ Mulhern
 
 \begin_layout Institute
 Red Hat, Inc.
+ + Hypothesis
 \end_layout
 
 \begin_layout Frame
@@ -184,19 +167,93 @@ Introduction
 
 \begin_deeper
 \begin_layout FrameSubtitle
-Why am I talking about Hypothesis?
+Who am I to be Talking about Property-based Testing in Python and Rust?
 \end_layout
 
 \begin_layout Itemize
-Discovered Hypothesis in Aug 2015
+Discovered 
+\emph on
+property-based
+\emph default
+ testing in this century (Haskell's QuickCheck
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hackage.haskell.org/package/QuickCheck
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+Discovered 
+\emph on
+Hypothesis
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://hypothesis.readthedocs.io/en/master/index.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ in Aug 2015
+\end_layout
+
+\begin_deeper
 \begin_layout Itemize
 Merged first Hypothesis PR in March 2016
 \end_layout
 
 \begin_layout Itemize
 Gave a tech talk at Red Hat about Hypothesis in May 2016
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://developers.redhat.com/blog/2016/06/24/the-hypothesis-testing-library-for-p
+ython-an-introduction/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -206,7 +263,7 @@ Merged a substantive PR into Hypothesis repo in June 2016
 \begin_layout Itemize
 Developed a Hypothesis strategy of my own in Jan 2017
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
@@ -231,53 +288,17 @@ https://github.com/stratis-storage/hs-dbus-signature
 Became a Hypothesis co-maintainer in 2017
 \end_layout
 
+\begin_layout Itemize
+Gave a talk about Hypothesis at Red Hat QE Camp in 2017
+\end_layout
+
 \end_deeper
-\begin_layout Standard
-\begin_inset Separator parbreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Introduction
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-What is the position of Hypothesis at Red Hat and elsewhere?
-\end_layout
-
 \begin_layout Itemize
-I believe that Hypothesis is used at Red Hat but I don't personally know
- anybody else who uses it here.
-\end_layout
+Discovered 
+\emph on
+proptest
+\emph default
 
-\begin_layout Itemize
-It is well liked in the world.
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Over two thousand stars on GitHub
-\end_layout
-
-\begin_layout Itemize
-More than ten entities have endorsed Hypothesis by submitting a PR to the
- Hypothesis repo
 \begin_inset Foot
 status open
 
@@ -287,7 +308,7 @@ status open
 
 \begin_layout Plain Layout
 
-http://hypothesis.readthedocs.io/en/latest/endorsements.html
+https://crates.io/crates/proptest
 \end_layout
 
 \end_inset
@@ -297,32 +318,12 @@ http://hypothesis.readthedocs.io/en/latest/endorsements.html
 
 \end_inset
 
-.
+ about six months ago
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
-More than thirty different dependent packages have been registered by submitting
- a PR to the Hypothesis repo
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://hypothesis.readthedocs.io/en/latest/usage.html
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
+Started working with proptest a few months ago
 \end_layout
 
 \end_deeper
@@ -485,7 +486,9 @@ def test():
 status open
 
 \begin_layout Plain Layout
-Example-Based Tests are a Good Idea
+Example-Based Tests are a 
+\emph on
+Good Idea
 \end_layout
 
 \end_inset
@@ -785,6 +788,11 @@ s.
 \end_layout
 
 \begin_layout Enumerate
+It tests your specification
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
 It makes arguments for your test functions using the strategies specified.
 \end_layout
 
@@ -792,18 +800,9 @@ It makes arguments for your test functions using the strategies specified.
 It runs tests for these arguments.
 \end_layout
 
+\end_deeper
 \begin_layout Enumerate
-It reports the results, stopping on the first failure, if any
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-This will be changing soon to include multi-bug reporting for a single test
-\end_layout
-
-\end_inset
-
-.
+It reports the results, stopping on the first failure, if any.
 \end_layout
 
 \begin_layout Enumerate
