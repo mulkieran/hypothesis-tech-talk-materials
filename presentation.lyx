@@ -83,31 +83,7 @@
 \begin_body
 
 \begin_layout Title
-The Hypothesis
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://hypothesis.works/
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- Testing Library for Python
-\end_layout
-
-\begin_layout Subtitle
-An Introduction
+Property-based Testing in Python and Rust
 \end_layout
 
 \begin_layout Author
@@ -116,11 +92,12 @@ Mulhern
 
 \begin_layout Institute
 Red Hat, Inc.
+ + Hypothesis
 \end_layout
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Introduction
@@ -167,7 +144,7 @@ Code Quality Tools
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Introduction
@@ -184,11 +161,63 @@ Introduction
 
 \begin_deeper
 \begin_layout FrameSubtitle
-Why am I talking about Hypothesis?
+Who am I to be Talking about Property-based Testing in Python and Rust?
 \end_layout
 
 \begin_layout Itemize
-Discovered Hypothesis in Aug 2015
+Discovered 
+\emph on
+property-based
+\emph default
+ testing early in this century (Haskell's QuickCheck
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://hackage.haskell.org/package/QuickCheck
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+Discovered 
+\emph on
+Hypothesis
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://hypothesis.readthedocs.io/en/master/index.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+in Aug 2015
 \end_layout
 
 \begin_layout Itemize
@@ -197,6 +226,27 @@ Merged first Hypothesis PR in March 2016
 
 \begin_layout Itemize
 Gave a tech talk at Red Hat about Hypothesis in May 2016
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://developers.redhat.com/blog/2016/06/24/the-hypothesis-testing-library-for-p
+ython-an-introduction/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -205,30 +255,46 @@ Merged a substantive PR into Hypothesis repo in June 2016
 
 \begin_layout Itemize
 Developed a Hypothesis strategy of my own in Jan 2017
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-https://github.com/stratis-storage/hs-dbus-signature
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Itemize
 Became a Hypothesis co-maintainer in 2017
+\end_layout
+
+\begin_layout Itemize
+Gave a talk about Hypothesis at Red Hat QE Camp in 2017 
+\end_layout
+
+\begin_layout Itemize
+Discovered 
+\emph on
+proptest
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://crates.io/crates/proptest
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ about six months ago
+\end_layout
+
+\begin_layout Itemize
+Started working with proptest a few months ago
 \end_layout
 
 \end_deeper
@@ -241,7 +307,7 @@ Became a Hypothesis co-maintainer in 2017
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Introduction
@@ -258,37 +324,417 @@ Introduction
 
 \begin_deeper
 \begin_layout FrameSubtitle
-What is the position of Hypothesis at Red Hat and elsewhere?
+Who am I to be Talking about Property-based Testing in Python and Rust?
 \end_layout
 
-\begin_layout Itemize
-I believe that Hypothesis is used at Red Hat but I don't personally know
- anybody else who uses it here.
-\end_layout
-
-\begin_layout Itemize
-It is well liked in the world.
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Over two thousand stars on GitHub
-\end_layout
-
-\begin_layout Itemize
-More than ten entities have endorsed Hypothesis by submitting a PR to the
- Hypothesis repo
-\begin_inset Foot
-status open
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Flex URL
-status open
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
 
 \begin_layout Plain Layout
-
-http://hypothesis.readthedocs.io/en/latest/endorsements.html
+library or application
 \end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+my job
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+domain
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+code coverage
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pyudev
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+maintainer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+storage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+?
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+justbytes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+principal developer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+storage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+> 95%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+justbases
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+principal developer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+storage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+> 95%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+hs-dbus-signature
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+principal developer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+D-Bus
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+69%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dbus-python-client-gen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+principal developer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+D-Bus
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dbus-client-gen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+principal developer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+D-Bus
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+into-dbus-python
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+principal developer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+D- Bus
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dbus-signature-pyparsing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+principal developer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+D-Bus
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+stratisd
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+one of several
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+storage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+?
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
 
 \end_inset
 
@@ -297,35 +743,9 @@ http://hypothesis.readthedocs.io/en/latest/endorsements.html
 
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Itemize
-More than thirty different dependent packages have been registered by submitting
- a PR to the Hypothesis repo
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://hypothesis.readthedocs.io/en/latest/usage.html
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
-\end_inset
-
-.
-\end_layout
-
-\end_deeper
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator parbreak
@@ -336,7 +756,7 @@ http://hypothesis.readthedocs.io/en/latest/usage.html
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Expectations
@@ -382,7 +802,7 @@ Pointers to other sources.
 
 \begin_layout FragileFrame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Example: Example-Based Testing
@@ -428,7 +848,7 @@ etc.
 
 \begin_layout ExampleBlock
 \begin_inset Argument 2
-status open
+status collapsed
 
 \begin_layout Plain Layout
 A Few Simple Example-Based Tests using Pytest
@@ -440,7 +860,7 @@ A Few Simple Example-Based Tests using Pytest
 \begin_inset listings
 lstparams "language=Python,showstringspaces=false"
 inline false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -467,6 +887,11 @@ def test():
     assert convert_from_nat(2, 3) == [2]
 \end_layout
 
+\begin_layout Plain Layout
+
+    # ...
+\end_layout
+
 \end_inset
 
 
@@ -482,10 +907,14 @@ def test():
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
-Example-Based Tests are a Good Idea
+Example-Based Tests are a 
+\emph on
+Good
+\emph default
+ Idea
 \end_layout
 
 \end_inset
@@ -505,12 +934,12 @@ much
 \emph default
  better than nothing and there is good library support in Python
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Pytest: 
 \begin_inset Flex URL
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -557,7 +986,7 @@ They catch regressions in new versions.
 
 \begin_layout FragileFrame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Example: Property-Based Testing (1)
@@ -602,7 +1031,7 @@ Use Hypothesis to test that the specification holds.
 
 \begin_layout ExampleBlock
 \begin_inset Argument 2
-status open
+status collapsed
 
 \begin_layout Plain Layout
 A Simple Test Using Hypothesis
@@ -614,7 +1043,7 @@ A Simple Test Using Hypothesis
 \begin_inset listings
 lstparams "language=Python,showstringspaces=false"
 inline false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -666,7 +1095,7 @@ def test(value, base):
 
 \begin_layout FragileFrame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Example: Property-Based Testing (2)
@@ -699,7 +1128,7 @@ convert_from_nat()
 
 \begin_layout ExampleBlock
 \begin_inset Argument 2
-status open
+status collapsed
 
 \begin_layout Plain Layout
 A Simple Test Using Hypothesis
@@ -711,7 +1140,7 @@ A Simple Test Using Hypothesis
 \begin_inset listings
 lstparams "language=Python,showstringspaces=false"
 inline false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -763,7 +1192,7 @@ def test(value, base):
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 What Hypothesis Does with This Test Code
@@ -785,6 +1214,11 @@ s.
 \end_layout
 
 \begin_layout Enumerate
+It tests your specification:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
 It makes arguments for your test functions using the strategies specified.
 \end_layout
 
@@ -793,21 +1227,12 @@ It runs tests for these arguments.
 \end_layout
 
 \begin_layout Enumerate
-It reports the results, stopping on the first failure, if any
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-This will be changing soon to include multi-bug reporting for a single test
+It reports the results, stopping on the first failure, if any.
 \end_layout
 
-\end_inset
-
-.
-\end_layout
-
+\end_deeper
 \begin_layout Enumerate
-It stores the tests in a database, remembering the result.
+It remembers the arguments that caused the test to fail.
 \end_layout
 
 \begin_layout Standard
@@ -825,7 +1250,7 @@ This is not a description of the implementation, just a simplified description
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Property-Based Testing is a 
@@ -846,7 +1271,7 @@ Great
 
 \begin_deeper
 \begin_layout FrameSubtitle
-Especially with Hypothesis.
+Especially with Hypothesis
 \end_layout
 
 \begin_layout Standard
@@ -877,7 +1302,7 @@ employ code reuse in the choice of examples
 favor examples that previously failed, enabling a simple-minded approach
  to debugging
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Does not work with CI, but nice when debugging on a personal machine.
@@ -906,7 +1331,7 @@ and so much more
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Property-Based Testing is not Easy
@@ -933,7 +1358,7 @@ A partial list of difficulties:
 \begin_layout Itemize
 It may be difficult to come up with a useful specification
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 You can always cheat with example-based tests.
@@ -945,18 +1370,19 @@ You can always cheat with example-based tests.
 \end_layout
 
 \begin_layout Itemize
-It may be difficult to express that specification in Python.
+It may be difficult, impossible, or perhaps pointless to express the specificati
+on in Hypothesis.
 \end_layout
 
 \begin_layout Itemize
-It may be hard to test that specification in a reasonable amount of time.
+It may be hard to test the specification in a reasonable amount of time.
 \end_layout
 
 \begin_layout Itemize
 It may be that Hypothesis does not have a strategy for generating the values
  needed as arguments to the specification
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Hypothesis has some strategies for composing other strategies; I had used
@@ -983,7 +1409,7 @@ But the gains are, typically, very great.
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 I Was Wrong...
@@ -1011,7 +1437,7 @@ Reasons:
 \begin_layout Itemize
 I was first introduced to property-based testing in Haskell
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Haskell's QuickCheck is the original implementation of this idea.
@@ -1036,7 +1462,7 @@ Examples are typically in mathematics or Haskelly sorts of applications.
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 ...but Now I Know Better
@@ -1058,7 +1484,7 @@ I have used Hypothesis successfully with pyudev, a library that wraps libudev.
 
 \begin_layout Standard
 When I took over this library from the original developer, I found that
- he had been using property-based testing all along! All I needed to do
+ they had been using property-based testing all along! All I needed to do
  was Hypothesize it.
 \end_layout
 
@@ -1096,7 +1522,7 @@ etc.
 
 \begin_layout FragileFrame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Example: Pyudev Hypothesis Testing
@@ -1115,12 +1541,12 @@ Example: Pyudev Hypothesis Testing
 \begin_layout FrameSubtitle
 Testing pyudev against itself 
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 More examples at 
 \begin_inset Flex URL
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1139,7 +1565,7 @@ https://github.com/pyudev/pyudev
 
 \begin_layout ExampleBlock
 \begin_inset Argument 2
-status open
+status collapsed
 
 \begin_layout Plain Layout
 A Simple Test Using Hypothesis
@@ -1151,7 +1577,7 @@ A Simple Test Using Hypothesis
 \begin_inset listings
 lstparams "language=Python,basicstyle={\footnotesize},showstringspaces=false"
 inline false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1232,7 +1658,7 @@ def test_from_name(self, a_context, a_device):
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Benefits of Hypothesizing the Tests
@@ -1285,7 +1711,212 @@ Found a few signficant bugs in pyudev, a few significant problems in libudev,
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
+status collapsed
+
+\begin_layout Plain Layout
+
+\family typewriter
+proptest
+\family default
+ is Pretty Good Too
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+There are two property-based testing libraries for Rust.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+quickcheck
+\family default
+ is inspired by Haskell's QuickCheck, 
+\family typewriter
+proptest
+\family default
+ by Hypothesis
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The fundamental difference is in how counter-examples are minimized
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\family typewriter
+quickcheck
+\family default
+ is older, but 
+\family typewriter
+proptest
+\family default
+ is nicer for me
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status collapsed
+
+\begin_layout Plain Layout
+
+\family typewriter
+proptest
+\family default
+ is Pretty Good Too
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Imitates Hypothesis in a very different language
+\end_layout
+
+\begin_layout Standard
+Where Hypothesis uses Python decorators, proptest uses Rust's hygenic macros.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status collapsed
+
+\begin_layout Plain Layout
+Example: Property-Based Testing (3)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Being a Hypothesis-alike library in Rust.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula $\forall v\geq0,\forall b\geq2,\mathtt{convert\_to\_nat}(\mathtt{convert\_from\_nat}(v,b),b)=v)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status collapsed
+
+\begin_layout Plain Layout
+A Simple Test Using proptest
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "showstringspaces=false"
+inline false
+status collapsed
+
+\begin_layout Plain Layout
+
+proptest!{
+\end_layout
+
+\begin_layout Plain Layout
+
+    #[test]
+\end_layout
+
+\begin_layout Plain Layout
+
+    fn test(value in any::<u64>(),
+\end_layout
+
+\begin_layout Plain Layout
+
+            base in 2u64...std::u64::MAX) {
+\end_layout
+
+\begin_layout Plain Layout
+
+        let result = convert_from_nat(value, base);
+\end_layout
+
+\begin_layout Plain Layout
+
+        assert_eq!(convert_to_nat(result, base),
+\end_layout
+
+\begin_layout Plain Layout
+
+                   value);
+\end_layout
+
+\begin_layout Plain Layout
+
+    }
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status collapsed
 
 \begin_layout Plain Layout
 Summary
@@ -1302,7 +1933,8 @@ Summary
 
 \begin_deeper
 \begin_layout FrameSubtitle
-Property-based testing is great and so is Hypothesis.
+Property-based testing with Hypothesis is great and it's pretty good with
+ proptest, too.
 \end_layout
 
 \begin_layout Standard
@@ -1310,11 +1942,11 @@ For all the reasons mentioned above:
 \end_layout
 
 \begin_layout Itemize
-memoization of examples that refute the specification
+an explicit specification
 \end_layout
 
 \begin_layout Itemize
-an explicit specification
+memoization of examples that refute the specification
 \end_layout
 
 \begin_layout Itemize
@@ -1335,332 +1967,7 @@ etc.
 
 \begin_layout Frame
 \begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Not Discussed (1)
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-Property-based testing in other languages.
-\end_layout
-
-\begin_layout Itemize
-Proof of concept of Hypothesis in Java
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-I haven't tried it.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Property-based testing in 
-\emph on
-many
-\emph default
- other languages
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-It's been tried and there is a list with estimates of quality at 
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-hypothesis.works
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator parbreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Not Discussed (2)
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-Other Hypothesis features.
-\end_layout
-
-\begin_layout Itemize
-Hypothesis's example minimization
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-I think my examples tend to be minimized by definition, although I'm not
- sure.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-The 
-\family typewriter
-note()
-\family default
- function, for displaying additional information about a failing test
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-This is most useful in CI, where you can't interact with the tests directly.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Hypothesis' higher-order strategies
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\family typewriter
-For example, builds()
-\family default
- makes a strategy by applying a function to the values generated by other
- strategies.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-How to write your own strategy from scratch.
-\end_layout
-
-\begin_layout Itemize
-Configuring Hypothesis globally or per-test
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-For example, setting 
-\family typewriter
-max-examples
-\family default
- limits the number of examples tried per-test or per-run.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Using Hypothesis interactively, or just using its strategies
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-If you just want to interact with objects generated by a strategy within
- the Python interpreter, that is an option, too.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator parbreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Not Discussed (3)
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-Property-based testing challenges and strategies.
-\end_layout
-
-\begin_layout Itemize
-Testing GUIs
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-I'm not often involved in writing Python GUIs.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Using coverage
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://coverage.readthedocs.io/en/coverage-4.0.3/index.html
-\end_layout
-
-\end_inset
-
- and Hypothesis together
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-It is often meaningful when you run 100 tests on a method, and some portion
- of the method is not covered.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Using custom strategies to generate mock objects.
-\end_layout
-
-\begin_layout Itemize
-Stateful testing
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Hypothesis has a way of, essentially, dynamically checking class invariants.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator parbreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Not Discussed (4)
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-Technical Remarks.
-\end_layout
-
-\begin_layout Itemize
-Hypothesis works with pytest and with unittest.
-\end_layout
-
-\begin_layout Itemize
-Hypothesis Python version support: 2.7, 3.3, 3.4, 3.5, 3.6 and Legacy 2.6
-\end_layout
-
-\begin_layout Itemize
-Hypothesis Python compiler support: CPython and PyPy.
-\end_layout
-
-\begin_layout Itemize
-Hypothesis is used to test itself.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator parbreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Thanks
@@ -1680,13 +1987,34 @@ Thanks
 Any questions or suggestions?
 \end_layout
 
-\end_deeper
 \begin_layout Standard
-\begin_inset Separator parbreak
-\end_inset
-
-
+Please contact me about property-based testing:
 \end_layout
 
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+mulhern
+\begin_inset Quotes erd
+\end_inset
+
+ on various Red Hat IRC channels: #storage, #stratis, #rust and on freenode
+ at #stratis-storage
+\end_layout
+
+\begin_layout Itemize
+My Red Hat email is 
+\begin_inset Quotes eld
+\end_inset
+
+amulhern
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
